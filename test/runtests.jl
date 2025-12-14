@@ -1,3 +1,4 @@
+using Documenter
 using TerrariaWiringHelper
 using TerrariaWiringHelper: AND, XOR, logicsymb, fuse, gate2string, lampstate2string
 using Test
@@ -116,3 +117,8 @@ end
     end
 end
 
+DocMeta.setdocmeta!(TerrariaWiringHelper, :DocTestSetup, :(using TerrariaWiringHelper); recursive=true)
+
+@testset "Doctest" begin
+    doctest(TerrariaWiringHelper)
+end

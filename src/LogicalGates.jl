@@ -13,7 +13,7 @@ Consider `AndGate(false, 4, [0x12, 0x09, 0x04])`. It's an `AND` gate whose defau
 - `0x04 = 0b00100` means the default state of the third lamp is `OFF` and only `c` is connected to the lamp.
 
 ```jldoctest
-julia> TR.AndGate(false, 4, [0x12, 0x09, 0x04])
+julia> AndGate(false, 4, [0x12, 0x09, 0x04])
 &(~b, ad, c)
 ```
 
@@ -63,13 +63,13 @@ const alphabet = "abcdefghijklmnopqrstuvwxyz"
 Convert binary coded `lampstate` into a readable string. `args` tells the number of distinct inputs.
 # Examples
 ```jldoctest
-julia> TR.lampstate2string(0b1111, 4)
+julia> lampstate2string(0b1111, 4)
 "abcd"
 
-julia> TR.lampstate2string(0b11101, 4)
+julia> lampstate2string(0b11101, 4)
 "~acd"
 
-julia> TR.lampstate2string(0b10000, 4)
+julia> lampstate2string(0b10000, 4)
 "~"
 ```
 """

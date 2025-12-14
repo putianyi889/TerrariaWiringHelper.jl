@@ -16,10 +16,10 @@ Return the state of a tile connected to multiple wires. Each bit of the input re
 
 # Examples
 ```jldoctest
-julia> fuse(0b0110)
+julia> TerrariaWiringHelper.fuse(0b0110)
 false
 
-julia> fuse(0b1011)
+julia> TerrariaWiringHelper.fuse(0b1011)
 true
 ```
 """
