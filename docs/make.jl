@@ -4,6 +4,7 @@ using TerrariaWiringHelper
 makedocs(
     sitename = "TerrariaWiringHelper",
     format = Documenter.HTML(),
+    doctest = false,
     modules = [TerrariaWiringHelper]
 )
 
