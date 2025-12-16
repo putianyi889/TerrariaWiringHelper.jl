@@ -1,6 +1,6 @@
 name = "TerrariaWiringHelper"
 uuid = "25498505-48c7-4d30-801f-92d3f675baa4"
-version = "1.0.0-DEV"
+version = "0.0.1"
 authors = ["Tianyi Pu <912396513@qq.com> and contributors"]
 
 [workspace]
