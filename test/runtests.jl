@@ -83,6 +83,9 @@ end
     @testset "reduce" begin
         v = Z2Vector(0b10110, 5)
         @test sum(v) ≡ true
+        @test prod(v) ≡ false
+        @test any(v) ≡ true
+        @test all(v) ≡ false
     end
 end
 
