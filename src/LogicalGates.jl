@@ -62,7 +62,7 @@ const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
 Convert binary coded `lampstate` into a readable string. `args` tells the number of distinct inputs.
 # Examples
-```jldoctest
+```jldoctest; setup = :"using TerrariaWiringHelper: lampstate2string"
 julia> lampstate2string(0b1111, 4)
 "abcd"
 

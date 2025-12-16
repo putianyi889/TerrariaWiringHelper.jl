@@ -4,20 +4,20 @@
 Returns minimal integer type that contains `n` bits
 
 # Examples
-```jldoctest
-julia> TR.bit2type(5)
+```jldoctest; setup = :"using TerrariaWiringHelper: bit2type"
+julia> bit2type(5)
 UInt8
 
-julia> TR.bit2type(9)
+julia> bit2type(9)
 UInt16
 
-julia> TR.bit2type(32)
+julia> bit2type(32)
 UInt32
 
-julia> TR.bit2type(33)
+julia> bit2type(33)
 UInt64
 
-julia> TR.bit2type(100)
+julia> bit2type(100)
 UInt128
 ```
 """
@@ -50,8 +50,8 @@ type2bit(::Type{T}) where T<:Integer = sizeof(T) << 3
 Get the `n`-th (counting from zero) last bit of `x`. See also [`setbit`](@ref)
 
 # Example
-```jldoctest
-julia> [TR.getbit(0b10110, n) for n in 0:4]
+```jldoctest; setup = :"using TerrariaWiringHelper: getbit"
+julia> [getbit(0b10110, n) for n in 0:4]
 5-element Vector{Bool}:
  0
  1
@@ -68,11 +68,11 @@ julia> [TR.getbit(0b10110, n) for n in 0:4]
 Set the `n`-th (counting from zero) last bit of `x` to `y`. See also [`getbit`](@ref).
 
 # Example
-```jldoctest
-julia> string(TR.setbit(0b10110, true, 0), base = 2)
+```jldoctest; setup = :"using TerrariaWiringHelper: setbit"
+julia> string(setbit(0b10110, true, 0), base = 2)
 "10111"
 
-julia> string(TR.setbit(0b10110, false, 0), base = 2)
+julia> string(setbit(0b10110, false, 0), base = 2)
 "10110"
 ```
 """
@@ -168,11 +168,11 @@ Convert `Number` to `Bool` in the ``\\mathbb{Z}_2`` sense.
 
 # Examples
 
-```jldoctest
-julia> TR.z2number(25)
+```jldoctest; setup = :"using TerrariaWiringHelper: z2number"
+julia> z2number(25)
 true
 
-julia> TR.z2number(1:5)
+julia> z2number(1:5)
 5-element BitVector:
  1
  0

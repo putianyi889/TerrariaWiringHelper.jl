@@ -1,7 +1,4 @@
-import Base: size, zero, fill!, getindex, promote_shape, setindex!, copy, transpose, adjoint, similar, one
-import Base: *, +, &, |, ⊻, ⊼, ⊽, ~, \
-import Base: UndefInitializer, Dims
-import LinearAlgebra: dot, AdjOrTrans, mul!, rank, det, checksquare, ldiv!, SingularException, lmul!, rmul!
+
 
 """
     Z2RowMat{C<:Integer, R<:Integer}(data::Vector{R}, size::Int)
@@ -12,8 +9,8 @@ import LinearAlgebra: dot, AdjOrTrans, mul!, rank, det, checksquare, ldiv!, Sing
 
 # Example
 ```jldoctest
-julia> TR.Z2RowMat([1, 3, 5], 3)
-3×3 PTY.TR.Z2RowMat{UInt8, UInt8}:
+julia> Z2RowMat([1, 3, 5], 3)
+3×3 Z2RowMat{UInt8, UInt8}:
  1  0  0
  1  1  0
  1  0  1
@@ -33,8 +30,8 @@ end
 
 # Example
 ```jldoctest
-julia> TR.Z2ColMat([1, 3, 5], 3)
-3×3 PTY.TR.Z2ColMat{UInt8, UInt8}:
+julia> Z2ColMat([1, 3, 5], 3)
+3×3 Z2ColMat{UInt8, UInt8}:
  1  1  1
  0  1  0
  0  0  1
@@ -131,66 +128,7 @@ for op in (:transpose, :adjoint)
 end
 
 
-"""
-    Z2Vector{T<:Integer}(data::T, size::Int)
-    Z2Vector(::AbstractVector)
 
-``\\mathbb{Z}_2`` vector stored in an integer `data` where each bit represents an entry. `size` specifies the length.
-
-# Example
-
-```jldoctest
-julia> TR.Z2Vector(0b10110, 5)
-5-element PTY.TR.Z2Vector{UInt8}:
- 0
- 1
- 1
- 0
- 1
-```
-"""
-mutable struct Z2Vector{T<:Integer} <: AbstractVector{Bool}
-    data::T
-    size::Int
-end
-Z2Vector(data::Integer, size::Integer) = Z2Vector{bit2type(size)}(data, size)
-function Z2Vector(v::AbstractVector{Bool})
-    T = bit2type(length(v))
-    ret = 0
-    for x in Iterators.reverse(v)
-        ret <<= 1
-        ret += x
-    end
-    Z2Vector{T}(ret, length(v))
-end
-Z2Vector(v::AbstractVector) = Z2Vector(Bool.(mod.(v,2)))
-
-size(v::Z2Vector) = (v.size, )
-getindex(v::Z2Vector, i::Integer) = getbit(v.data, i-1)
-function setindex!(v::Z2Vector, x::Number, i::Integer)
-    v.data = setbit(v.data, z2number(x), i-1)
-    v
-end
-
-datamask(A::Z2Vector{T}) where T = (one(T) << A.size) - one(T)
-
-zero(v::Z2Vector{T}) where T = Z2Vector{T}(zero(T), v.size)
-copy(v::Z2Vector{T}) where T = Z2Vector{T}(v.data, v.size)
-similar(v::Z2Vector) = copy(v)
-
-function fill!(v::Z2Vector{T}, x::Number) where T
-    v.data = ifelse(z2number(x), datamask(v), zero(T))
-    v
-end
-
-for op in (:&, :|, :⊻, :⊽, :⊼)
-    @eval function $op(A::Z2Vector{T}, B::Z2Vector{T}) where T
-        promote_shape(A, B)
-        Z2Vector{T}($op(A.data, B.data), A.size)
-    end
-end
-
-~(v::Z2Vector{T}) where T = Z2Vector(v.data ⊻ datamask(v), length(v))
 
 # algebra
 

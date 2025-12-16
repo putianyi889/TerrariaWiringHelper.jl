@@ -58,11 +58,11 @@ julia> inputs = 16:25; # `0:9` with the 5th last bit set to `1`
 
 julia> outputs = [true, false, false, true, false, false, true, false, false, true];
 
-julia> TR.CombLogic(2, inputs, outputs) # there is no 2-lamp logic
-PTY.TR.CombGate{Int64, StaticArraysCore.SVector{2, UInt8}}[]
+julia> CombLogic(2, inputs, outputs) # there is no 2-lamp logic
+Union{AndGate{Int64, StaticArraysCore.SVector{2, UInt8}}, XorGate{Int64, StaticArraysCore.SVector{2, UInt8}}}[]
 
-julia> TR.CombLogic(3, inputs, outputs) # there are 12 3-lamp logics, all of which use XOR gates
-12-element Vector{PTY.TR.CombGate{Int64, StaticArraysCore.SVector{3, UInt8}}}:
+julia> CombLogic(3, inputs, outputs) # there are 12 3-lamp logics, all of which use XOR gates
+12-element Vector{Union{AndGate{Int64, StaticArraysCore.SVector{3, UInt8}}, XorGate{Int64, StaticArraysCore.SVector{3, UInt8}}}}:
  ^(~b, ad, c)
  ^(~b, abd, bc)
  ^(~ac, ad, ab)
@@ -83,7 +83,7 @@ function CombLogic(lamps::Integer, inputs::AbstractVector{<:Integer}, outputs::A
 	stack = MVector{lamps, UInt8}(undef)
 	top = 1
 	stack[1] = 0
-	ret = Vector{CombGate{Int, SVector{lamps, UInt8}}}()
+	ret = Vector{Union{AndGate{Int, SVector{lamps, UInt8}}, XorGate{Int, SVector{lamps, UInt8}}}}()
 	cases = 1 << (args + true)
 	while top > 0
 		if top == lamps

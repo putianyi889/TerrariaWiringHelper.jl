@@ -60,6 +60,32 @@ using Test
     end
 end
 
+@testset "Z2LinearAlgebra" begin
+    @testset "constructor" begin
+        @test Z2Vector(0b10110, 5) isa AbstractVector{Bool}
+        @test Z2Vector([false, true, true, false, true]) == Z2Vector(0b10110, 5)
+
+        v = Z2Vector(0b110110, 5)
+        @test v.data ≡ 0b10110
+        @test v.size ≡ 5
+    end
+    @testset "index" begin
+        v = Z2Vector(0b10110, 5)
+
+        @test_throws BoundsError v[0]
+        @test_throws BoundsError v[6]
+
+        @test v == [false, true, true, false, true]
+
+        @test typeof(v[:]) == typeof(v[1:5]) == typeof(v)
+        @test v[:] == v[1:5] == v
+    end
+    @testset "reduce" begin
+        v = Z2Vector(0b10110, 5)
+        @test sum(v) ≡ true
+    end
+end
+
 @testset "LogicalGates" begin
     @testset "constructor" begin
         @test AndGate(false, 2, [0]) isa AndGate
@@ -117,7 +143,10 @@ end
     end
 end
 
-DocMeta.setdocmeta!(TerrariaWiringHelper, :DocTestSetup, :(using TerrariaWiringHelper); recursive=true)
+DocMeta.setdocmeta!(TerrariaWiringHelper, :DocTestSetup, :(
+    using TerrariaWiringHelper;
+    using TerrariaWiringHelper: z2number, lampstate2string, bit2type, setbit, getbit, datamask
+); recursive=true)
 
 @testset "Doctest" begin
     doctest(TerrariaWiringHelper)
