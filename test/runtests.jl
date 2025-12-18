@@ -1,4 +1,5 @@
 using Documenter
+using LinearAlgebra: ⋅
 using TerrariaWiringHelper
 using TerrariaWiringHelper: AND, XOR, logicsymb, fuse, gate2string, lampstate2string
 using Test
@@ -86,6 +87,14 @@ end
         @test prod(v) ≡ false
         @test any(v) ≡ true
         @test all(v) ≡ false
+    end
+    @testset "algebra" begin
+        u = Z2Vector(0b01101, 5)
+        v = Z2Vector(0b10110, 5)
+
+        @test u + v == Z2Vector(0b11011, 5)
+        @test u - v == Z2Vector(0b11011, 5)
+        @test u ⋅ v ≡ true
     end
 end
 

@@ -145,11 +145,6 @@ function rmul!(v::Z2Vector{T}, x::Bool) where T
     v
 end
 
-function +(u::Z2Vector{T}, v::Z2Vector{T}) where T
-    promote_shape(u, v)
-    Z2Vector(u.data ⊻ v.data, u.size)
-end
-
 function dot(u::Z2Vector, v::Z2Vector)
     if length(u) != length(v)
         throw(DimensionMismatch("first array has length $(length(u)) which does not match the length of the second, $(length(v))."))
