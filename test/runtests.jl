@@ -1,4 +1,5 @@
 using Documenter
+using LinearAlgebra: ⋅
 using TerrariaWiringHelper
 using TerrariaWiringHelper: AND, XOR, logicsymb, fuse, gate2string, lampstate2string
 using Test
