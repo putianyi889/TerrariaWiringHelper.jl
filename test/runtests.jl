@@ -66,6 +66,9 @@ end
         @test Z2Vector(0b10110, 5) isa AbstractVector{Bool}
         @test Z2Vector([false, true, true, false, true]) == Z2Vector(0b10110, 5)
 
+        @test Z2Vector(0b10110, 4).data == 0b110 # safe constructor
+        @test unsafe_Z2Vector(0b10110, 4).data == 0b10110 # unsafe constructor
+
         v = Z2Vector(0b110110, 5)
         @test v.data ≡ 0b10110
         @test v.size ≡ 5
@@ -95,6 +98,35 @@ end
         @test u + v == Z2Vector(0b11011, 5)
         @test u - v == Z2Vector(0b11011, 5)
         @test u ⋅ v ≡ true
+    end
+    @testset "matrix" begin
+        data = rand(Bool, 5, 10)
+
+        A = Z2ColMat(data)
+        @test A isa Z2ColMat{UInt8, UInt16}
+        @test A.size == 5
+        @test A == data
+
+        B = Z2RowMat(data)
+
+        @test B isa Z2RowMat{UInt8, UInt16}
+        @test B.size == 10
+        @test B == data
+    end
+    @testset "unsafe constructor" begin
+        A_unsafe = unsafe_Z2ColMat([0b11111, 0b11111], 4)
+        A_safe = Z2ColMat([0b11111, 0b11111], 4)
+
+        @test A_unsafe != A_safe
+        @test A_unsafe.data == [0b11111, 0b11111]
+        @test A_safe.data == [0b1111, 0b1111]
+
+        B_unsafe = unsafe_Z2RowMat([0b11111, 0b11111], 4)
+        B_safe = Z2RowMat([0b11111, 0b11111], 4)
+
+        @test B_unsafe != B_safe
+        @test B_unsafe.data == [0b11111, 0b11111]
+        @test B_safe.data == [0b1111, 0b1111]
     end
 end
 

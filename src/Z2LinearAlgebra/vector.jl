@@ -19,19 +19,20 @@ julia> Z2Vector(0b10110, 5)
 mutable struct Z2Vector{T<:Integer} <: AbstractVector{Bool}
     data::T
     size::Int
-    Z2Vector{T}(data::Integer, size::Int) where T = new{T}(T(data) & datamask(T, size), size)
+    Z2Vector{T}(data::Integer, size::Int) where T = unsafe_Z2Vector(T(data) & datamask(T, size), size)
+
+    global unsafe_Z2Vector(data::T, size::Int) where T = new{T}(data, size)
 end
 Z2Vector(data::Integer, size::Integer) = Z2Vector{bit2type(size)}(data, size)
-function Z2Vector(v::AbstractVector{Bool})
-    T = bit2type(length(v))
-    ret = 0
-    for x in Iterators.reverse(v)
+Z2Vector(itr) = Z2Vector{bit2type(length(itr))}(itr)
+function Z2Vector{T}(itr) where T
+    ret = zero(T)
+    for x in Iterators.reverse(itr)
         ret <<= 1
-        ret += x
+        ret += isodd(x)
     end
-    Z2Vector{T}(ret, length(v))
+    unsafe_Z2Vector(ret, length(itr))
 end
-Z2Vector(v::AbstractVector) = Z2Vector(Bool.(mod.(v,2)))
 
 size(v::Z2Vector) = (v.size, )
 unsafe_getindex(v::Z2Vector, i::Integer) = getbit(v.data, i-1)
