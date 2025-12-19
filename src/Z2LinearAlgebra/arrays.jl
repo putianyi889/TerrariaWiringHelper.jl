@@ -93,10 +93,6 @@ end
 size(A::Z2RowMat) = (length(A.data), A.size)
 size(A::Z2ColMat) = (A.size, length(A.data))
 
-getindex(A::Z2RowMat, i::Integer, j::Integer) = getbit(A.data[i], j-1)
-getindex(A::Z2ColMat, i::Integer, j::Integer) = getbit(A.data[j], i-1)
-getindex(A::Z2RowMat, i::Integer, ::Colon) = Z2Vector(A.data[i], size(A,2))
-
 function setindex!(A::Z2RowMat, x::Number, i::Integer, j::Integer)
     A.data[i] = setbit(A.data[i], z2number(x), j-1)
 end

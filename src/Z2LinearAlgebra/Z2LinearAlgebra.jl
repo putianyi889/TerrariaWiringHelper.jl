@@ -7,5 +7,6 @@ import LinearAlgebra: dot, AdjOrTrans, mul!, rank, det, checksquare, ldiv!, Sing
 include("helper.jl")
 include("vector.jl")
 include("arrays.jl")
+include("indexing.jl")
 include("reduce.jl")
 include("algebra.jl")
