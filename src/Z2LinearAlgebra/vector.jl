@@ -35,7 +35,6 @@ function Z2Vector{T}(itr) where T
 end
 
 size(v::Z2Vector) = (v.size, )
-unsafe_getindex(v::Z2Vector, i::Integer) = getbit(v.data, i-1)
 IndexStyle(::Type{<:Z2Vector}) = IndexLinear()
 similar(::Z2Vector{T}, ::Type{Bool}, dims::Tuple{Int}) where T = Z2Vector(zero(T), dims[1])
 
@@ -43,7 +42,6 @@ function getindex(v::Z2Vector, i::Integer)
     @boundscheck checkbounds(v, i)
     unsafe_getindex(v, i)
 end
-# getindex(v::Z2Vector, ::Colon) = copy(v)
 function setindex!(v::Z2Vector, x::Number, i::Integer)
     v.data = setbit(v.data, z2number(x), i-1)
     v

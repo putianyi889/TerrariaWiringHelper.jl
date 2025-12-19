@@ -62,12 +62,10 @@ using Test
 end
 
 @testset "Z2LinearAlgebra" begin
-    @testset "constructor" begin
+    @testset "vector basics" begin
         @test Z2Vector(0b10110, 5) isa AbstractVector{Bool}
         @test Z2Vector([false, true, true, false, true]) == Z2Vector(0b10110, 5)
 
-        @test Z2Vector(0b10110, 4).data == 0b110 # safe constructor
-        @test unsafe_Z2Vector(0b10110, 4).data == 0b10110 # unsafe constructor
 
         v = Z2Vector(0b110110, 5)
         @test v.data ≡ 0b10110
@@ -99,7 +97,7 @@ end
         @test u - v == Z2Vector(0b11011, 5)
         @test u ⋅ v ≡ true
     end
-    @testset "matrix" begin
+    @testset "matrix basics" begin
         data = rand(Bool, 5, 10)
 
         A = Z2ColMat(data)
@@ -107,13 +105,30 @@ end
         @test A.size == 5
         @test A == data
 
+        @test A[1, :] isa Z2Vector{UInt16}
+        @test A[1, :] == data[1, :]
+        @test A[:, 1] isa Z2Vector{UInt8}
+        @test A[:, 1] == data[:, 1]
+
         B = Z2RowMat(data)
 
         @test B isa Z2RowMat{UInt8, UInt16}
         @test B.size == 10
         @test B == data
+
+        @test B[1, :] isa Z2Vector{UInt16}
+        @test B[1, :] == data[1, :]
+        @test B[:, 1] isa Z2Vector{UInt8}
+        @test B[:, 1] == data[:, 1]
     end
-    @testset "unsafe constructor" begin
+    @testset "unsafe constructors" begin
+        v_unsafe = unsafe_Z2Vector(0b10110, 4)
+        v_safe = Z2Vector(0b10110, 4)
+
+        @test v_unsafe != v_safe
+        @test v_unsafe.data == 0b10110
+        @test v_safe.data == 0b110
+
         A_unsafe = unsafe_Z2ColMat([0b11111, 0b11111], 4)
         A_safe = Z2ColMat([0b11111, 0b11111], 4)
 
