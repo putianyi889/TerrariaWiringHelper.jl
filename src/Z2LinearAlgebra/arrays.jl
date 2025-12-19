@@ -19,6 +19,16 @@ julia> Z2RowMat([1, 3, 5], 3)
 mutable struct Z2RowMat{C<:Integer, R<:Integer} <: AbstractMatrix{Bool}
     data::Vector{R}
     size::Int
+
+    function Z2RowMat{C,R}(data::Vector{R}, size::Int) where {C,R}
+        for i in eachindex(data)
+            data[i] &= datamask(R, size)
+        end
+        unsafe_Z2RowMat(C, data, size)
+    end
+
+    global unsafe_Z2RowMat(C::Type{<:Integer}, data::Vector{R}, size::Int) where R = new{C,R}(data, size)
+    unsafe_Z2RowMat(data::Vector{R}, size::Int) where R = unsafe_Z2RowMat(bit2type(size), data, size)
 end
 
 """
@@ -40,10 +50,30 @@ julia> Z2ColMat([1, 3, 5], 3)
 mutable struct Z2ColMat{C<:Integer, R<:Integer} <: AbstractMatrix{Bool}
     data::Vector{C}
     size::Int
+
+    function Z2ColMat{C,R}(data::Vector{C}, size::Int) where {C,R}
+        for i in eachindex(data)
+            data[i] &= datamask(C, size)
+        end
+        unsafe_Z2ColMat(R, data, size)
+    end
+
+    global unsafe_Z2ColMat(R::Type{<:Integer}, data::Vector{C}, size::Int) where C = new{C,R}(data, size)
+    unsafe_Z2ColMat(data::Vector{C}, size::Int) where C = unsafe_Z2ColMat(bit2type(size), data, size)
 end
 const Z2Mat{C,R} = Union{Z2RowMat{C,R}, Z2ColMat{C,R}}
-Z2RowMat(data::AbstractVector{<:Integer}, cols::Integer) = Z2RowMat{bit2type(length(data)), bit2type(cols)}(data, cols)
-Z2ColMat(data::AbstractVector{<:Integer}, rows::Integer) = Z2ColMat{bit2type(rows), bit2type(length(data))}(data, rows)
+
+function Z2RowMat(data::AbstractVector{<:Integer}, cols::Integer)
+    C = bit2type(length(data))
+    R = bit2type(cols)
+    Z2RowMat{C,R}(convert(Vector{R}, (data)), cols)
+end
+function Z2ColMat(data::AbstractVector{<:Integer}, rows::Integer)
+    C = bit2type(rows)
+    R = bit2type(length(data))
+    Z2ColMat{C,R}(convert(Vector{C}, (data)), rows)
+end
+
 Z2RowMat{C,R}(::UndefInitializer, m::Integer, n::Integer) where {C,R} = Z2RowMat{C,R}(zeros(R, m), n)
 Z2ColMat{C,R}(::UndefInitializer, m::Integer, n::Integer) where {C,R} = Z2ColMat{C,R}(zeros(C, n), m)
 function Z2RowMat(A::AbstractMatrix)
