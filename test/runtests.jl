@@ -63,13 +63,17 @@ end
 
 @testset "Z2LinearAlgebra" begin
     @testset "vector basics" begin
-        @test Z2Vector(0b10110, 5) isa AbstractVector{Bool}
-        @test Z2Vector([false, true, true, false, true]) == Z2Vector(0b10110, 5)
+        v = Z2Vector(0b10110, 5)
+        @test v isa Z2Vector{UInt8}
+        @test Z2Vector([false, true, true, false, true]) == v
 
-
-        v = Z2Vector(0b110110, 5)
         @test v.data ≡ 0b10110
         @test v.size ≡ 5
+
+        zerov = zero(v)
+        @test zerov isa Z2Vector{UInt8}
+        @test iszero(zerov.data)
+        @test iszero(zerov)
     end
     @testset "index" begin
         v = Z2Vector(0b10110, 5)
@@ -99,27 +103,55 @@ end
     end
     @testset "matrix basics" begin
         data = rand(Bool, 5, 10)
+        rect_col = Z2ColMat(data)
+        rect_row = Z2RowMat(data)
 
-        A = Z2ColMat(data)
-        @test A isa Z2ColMat{UInt8, UInt16}
-        @test A.size == 5
-        @test A == data
+        @testset "properties" begin
+            @test rect_col isa Z2ColMat{UInt8, UInt16}
+            @test rect_row isa Z2RowMat{UInt8, UInt16}
+            @test rect_col.size == 5
+            @test rect_row.size == 10
+            @test rect_col == rect_row == data
+        end
 
-        @test A[1, :] isa Z2Vector{UInt16}
-        @test A[1, :] == data[1, :]
-        @test A[:, 1] isa Z2Vector{UInt8}
-        @test A[:, 1] == data[:, 1]
+        @testset "index" begin
+            @test rect_col[1, :] isa Z2Vector{UInt16}
+            @test rect_row[1, :] isa Z2Vector{UInt16}
+            @test rect_col[1, :] == rect_row[1, :] == data[1, :]
 
-        B = Z2RowMat(data)
+            @test rect_col[:, 1] isa Z2Vector{UInt8}
+            @test rect_row[:, 1] isa Z2Vector{UInt8}
+            @test rect_col[:, 1] == rect_row[:, 1] == data[:, 1]
+        end
 
-        @test B isa Z2RowMat{UInt8, UInt16}
-        @test B.size == 10
-        @test B == data
+        @testset "zero" begin
+            zero_col = zero(rect_col)
+            zero_row = zero(rect_row)
 
-        @test B[1, :] isa Z2Vector{UInt16}
-        @test B[1, :] == data[1, :]
-        @test B[:, 1] isa Z2Vector{UInt8}
-        @test B[:, 1] == data[:, 1]
+            @test zero_col isa Z2ColMat{UInt8, UInt16}
+            @test zero_row isa Z2RowMat{UInt8, UInt16}
+            @test zero_col == zero_row == zero(data)
+
+            @test iszero(zero_col)
+            @test iszero(zero_row)
+        end
+
+        @testset "one" begin
+            @test_throws DimensionMismatch one(rect_col)
+            @test_throws DimensionMismatch one(rect_row)
+
+            square_col = Z2ColMat(data[1:5, 1:5])
+            square_row = Z2RowMat(data[1:5, 1:5])
+            one_col = one(square_col)
+            one_row = one(square_row)
+
+            @test one_col isa Z2ColMat{UInt8, UInt8}
+            @test one_row isa Z2RowMat{UInt8, UInt8}
+            @test one_col == one_row == one(data[1:5, 1:5])
+
+            @test isone(one_col)
+            @test isone(one_row)
+        end
     end
     @testset "unsafe constructors" begin
         v_unsafe = unsafe_Z2Vector(0b10110, 4)
