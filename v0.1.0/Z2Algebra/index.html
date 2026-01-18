@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Algebra on mathbbZ_2 · TerrariaWiringHelper</title><meta name="title" content="Algebra on mathbbZ_2 · TerrariaWiringHelper"/><meta property="og:title" content="Algebra on mathbbZ_2 · TerrariaWiringHelper"/><meta property="twitter:title" content="Algebra on mathbbZ_2 · TerrariaWiringHelper"/><meta name="description" content="Documentation for TerrariaWiringHelper."/><meta property="og:description" content="Documentation for TerrariaWiringHelper."/><meta property="twitter:description" content="Documentation for TerrariaWiringHelper."/><script data-outdated-warner src="../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../search_index.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../">TerrariaWiringHelper</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../">TerrariaWiringHelper.jl</a></li><li class="is-active"><a class="tocitem" href>Algebra on <span>$\mathbb{Z}_2$</span></a><ul class="internal"><li><a class="tocitem" href="#Introduction-to-\\mathbb{Z}_2"><span>Introduction to <span>$\mathbb{Z}_2$</span></span></a></li><li><a class="tocitem" href="#Vectors-and-Matrices"><span>Vectors and Matrices</span></a></li></ul></li><li><a class="tocitem" href="../docstrings/">Docstrings</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li class="is-active"><a href>Algebra on <span>$\mathbb{Z}_2$</span></a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Algebra on <span>$\mathbb{Z}_2$</span></a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/putianyi889/TerrariaWiringHelper.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/putianyi889/TerrariaWiringHelper.jl/blob/master/docs/src/Z2Algebra.md" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="Algebra-on-\\mathbb{Z}_2"><a class="docs-heading-anchor" href="#Algebra-on-\\mathbb{Z}_2">Algebra on <span>$\mathbb{Z}_2$</span></a><a id="Algebra-on-\\mathbb{Z}_2-1"></a><a class="docs-heading-anchor-permalink" href="#Algebra-on-\\mathbb{Z}_2" title="Permalink"></a></h1><p>Algebra on <span>$\mathbb{Z}_2$</span> is a useful tool for modelling and solving problems in Terraria logical wiring. <a href="https://github.com/putianyi889/Z2Algebra.jl">Z2Algebra.jl</a> provides the functionality we need.</p><pre><code class="language-julia-repl hljs" style="display:block;">julia&gt; using Pkg; Pkg.add(url=&quot;https://github.com/putianyi889/Z2Algebra.jl&quot;)</code><code class="nohighlight hljs ansi" style="display:block;">    Updating git-repo `https://github.com/putianyi889/Z2Algebra.jl`
+    Updating registry at `~/.julia/registries/General.toml`
+   Resolving package versions...
+    Updating `~/work/TerrariaWiringHelper.jl/TerrariaWiringHelper.jl/docs/Project.toml`
+  [fff55359] + Z2Algebra v0.0.1 `https://github.com/putianyi889/Z2Algebra.jl#master`
+    Manifest No packages added to or removed from `~/work/TerrariaWiringHelper.jl/TerrariaWiringHelper.jl/Manifest.toml`</code><br/><code class="language-julia-repl hljs" style="display:block;">julia&gt; using Z2Algebra</code></pre><h2 id="Introduction-to-\\mathbb{Z}_2"><a class="docs-heading-anchor" href="#Introduction-to-\\mathbb{Z}_2">Introduction to <span>$\mathbb{Z}_2$</span></a><a id="Introduction-to-\\mathbb{Z}_2-1"></a><a class="docs-heading-anchor-permalink" href="#Introduction-to-\\mathbb{Z}_2" title="Permalink"></a></h2><p>Basically, <span>$\mathbb{Z}_2$</span> is a set with two elements: 0 and 1, which can be viewed as even and odd numbers. The addition and multiplication operations on <span>$\mathbb{Z}_2$</span> follow those of the even and the odd numbers, that is,</p><pre><code class="language-julia-repl hljs" style="display:block;">julia&gt; Z2Number(0)+Z2Number(0), Z2Number(1)+Z2Number(1)</code><code class="nohighlight hljs ansi" style="display:block;">(ℤ₂(0), ℤ₂(0))</code><br/><code class="language-julia-repl hljs" style="display:block;">julia&gt; Z2Number(0)+Z2Number(1), Z2Number(1)+Z2Number(0)</code><code class="nohighlight hljs ansi" style="display:block;">(ℤ₂(1), ℤ₂(1))</code><br/><code class="language-julia-repl hljs" style="display:block;">julia&gt; Z2Number(0)*Z2Number(0), Z2Number(0)*Z2Number(1), Z2Number(1)*Z2Number(0)</code><code class="nohighlight hljs ansi" style="display:block;">(ℤ₂(0), ℤ₂(0), ℤ₂(0))</code><br/><code class="language-julia-repl hljs" style="display:block;">julia&gt; Z2Number(1)*Z2Number(1)</code><code class="nohighlight hljs ansi" style="display:block;">ℤ₂(1)</code></pre><p><span>$\mathbb{Z}_2$</span> is related to Terraria logical wiring. Let <span>$0$</span>-<span>$1$</span> represent the <code>false</code>-<code>true</code> states of a wire/lamp. </p><ul><li>Suppose that multiple wires connect to the same lamp/torch, then the state of the lamp is the sum of the wire states in the <span>$\mathbb{Z}_2$</span> sense. </li><li>Suppose that an AND gate has multiple lamps, then the state of the AND gate is the product of the lamp states in the <span>$\mathbb{Z}_2$</span> sense.</li></ul><h2 id="Vectors-and-Matrices"><a class="docs-heading-anchor" href="#Vectors-and-Matrices">Vectors and Matrices</a><a id="Vectors-and-Matrices-1"></a><a class="docs-heading-anchor-permalink" href="#Vectors-and-Matrices" title="Permalink"></a></h2><p>A <span>$\mathbb{Z}_2$</span> vector is a sequence of <span>$\mathbb{Z}_2$</span> numbers. It can represent</p><ul><li>The lamp states on a gate,</li><li>The states of a series of wires,</li><li>The segment states of a segment display.</li></ul><p>A <span>$\mathbb{Z}_2$</span> matrix is a 2-dimensional array of <span>$\mathbb{Z}_2$</span> numbers. It can represent the connection between <span>$\mathbb{Z}_2$</span> vectors.</p><h3 id="Guide:-a-segment-display"><a class="docs-heading-anchor" href="#Guide:-a-segment-display">Guide: a segment display</a><a id="Guide:-a-segment-display-1"></a><a class="docs-heading-anchor-permalink" href="#Guide:-a-segment-display" title="Permalink"></a></h3><p>Consider the 7-segment display</p><p><img src="../assets/112.png" alt="7-segment display"/></p><p>Denote the 7 wires by <span>$A,B,C,D,E,F,G$</span> as shown in the image. Let the two vertical segments on the left be <span>$a,b$</span>, three in the middle be <span>$c,d,e$</span>, and the two on the right be <span>$f,g$</span>, all from top to bottom. The 7-segment display can then be represented by the following matrix</p><p class="math-container">\[\mathbf{M} = \left(
+\begin{array}{c|ccccccc}
+  &amp; A &amp; B &amp; C &amp; D &amp; E &amp; F &amp; G \\\hline
+a &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+b &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+c &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+d &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\
+e &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+f &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 \\
+g &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
+\end{array}
+\right)\]</p><p>With <code>Z2Algebra.jl</code>, this matrix can be created via</p><pre><code class="language-julia-repl hljs" style="display:block;">julia&gt; M = Z2Matrix([
+           0 1 1 1 0 0 0;
+           0 0 1 1 0 0 0;
+           1 0 0 0 0 0 0;
+           0 0 0 0 1 0 0;
+           0 0 0 1 0 0 0;
+           0 0 0 0 1 1 1;
+           0 0 0 0 0 1 0;
+       ])</code><code class="nohighlight hljs ansi" style="display:block;">7×7 Z2Algebra.Z2Matrix{Matrix{Z2Algebra.Z2Block}}:
+ ℤ₂(0)  ℤ₂(1)  ℤ₂(1)  ℤ₂(1)  ℤ₂(0)  ℤ₂(0)  ℤ₂(0)
+ ℤ₂(0)  ℤ₂(0)  ℤ₂(1)  ℤ₂(1)  ℤ₂(0)  ℤ₂(0)  ℤ₂(0)
+ ℤ₂(1)  ℤ₂(0)  ℤ₂(0)  ℤ₂(0)  ℤ₂(0)  ℤ₂(0)  ℤ₂(0)
+ ℤ₂(0)  ℤ₂(0)  ℤ₂(0)  ℤ₂(0)  ℤ₂(1)  ℤ₂(0)  ℤ₂(0)
+ ℤ₂(0)  ℤ₂(0)  ℤ₂(0)  ℤ₂(1)  ℤ₂(0)  ℤ₂(0)  ℤ₂(0)
+ ℤ₂(0)  ℤ₂(0)  ℤ₂(0)  ℤ₂(0)  ℤ₂(1)  ℤ₂(1)  ℤ₂(1)
+ ℤ₂(0)  ℤ₂(0)  ℤ₂(0)  ℤ₂(0)  ℤ₂(0)  ℤ₂(1)  ℤ₂(0)</code></pre><p>The wire states can be represented by a <span>$\mathbb{Z}_2$</span> vector of length 7, for example,</p><p class="math-container">\[\mathbf{x} = 
+\left(
+\begin{array}{c|c}
+A&amp;1\\
+B&amp;0\\
+C&amp;1\\
+D&amp;1\\
+E&amp;1\\
+F&amp;1\\
+G&amp;0
+\end{array}
+\right)\]</p><pre><code class="language-julia-repl hljs" style="display:block;">julia&gt; x = Z2ColVector([1, 0, 1, 1, 1, 1, 0])</code><code class="nohighlight hljs ansi" style="display:block;">7-element Z2Algebra.Z2ColVector{Vector{Z2Algebra.Z2Block}}:
+ ℤ₂(1)
+ ℤ₂(0)
+ ℤ₂(1)
+ ℤ₂(1)
+ ℤ₂(1)
+ ℤ₂(1)
+ ℤ₂(0)</code></pre><p>Then, the segment states denoted by vector <span>$\mathbf{y}$</span> can be calculated by</p><pre><code class="language-julia-repl hljs" style="display:block;">julia&gt; y = M * x</code><code class="nohighlight hljs ansi" style="display:block;">7-element Z2Algebra.Z2ColVector{Vector{Z2Algebra.Z2Block}}:
+ ℤ₂(0)
+ ℤ₂(0)
+ ℤ₂(1)
+ ℤ₂(1)
+ ℤ₂(1)
+ ℤ₂(0)
+ ℤ₂(1)</code></pre><p class="math-container">\[\mathbf{y} = \mathbf{M}\mathbf{x} =
+\left(
+\begin{array}{c|c}
+a&amp;1\\
+b&amp;0\\
+c&amp;1\\
+d&amp;1\\
+e&amp;1\\
+f&amp;0\\
+g&amp;0
+\end{array}
+\right)\]</p><div class="admonition is-info" id="Nontrivial-initial-state-da8320e384114846"><header class="admonition-header">Nontrivial initial state<a class="admonition-anchor" href="#Nontrivial-initial-state-da8320e384114846" title="Permalink"></a></header><div class="admonition-body"><p>If the initial segment states are <span>$\mathbf{y}_0\ne \mathbf{0}$</span>, then <span>$\mathbf{y}=\mathbf{M}\mathbf{x}+\mathbf{y}_0$</span>.</p></div></div><p>Conversely, providing the segment states <span>$\mathbf{y}$</span>, we can obtain the wire states <span>$\mathbf{x}$</span> through</p><pre><code class="language-julia-repl hljs" style="display:block;">julia&gt; x = M \ y</code><code class="nohighlight hljs ansi" style="display:block;">7-element Vector{Z2Algebra.Z2Number}:
+ ℤ₂(1)
+ ℤ₂(0)
+ ℤ₂(1)
+ ℤ₂(1)
+ ℤ₂(1)
+ ℤ₂(1)
+ ℤ₂(0)</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../">« TerrariaWiringHelper.jl</a><a class="docs-footer-nextpage" href="../docstrings/">Docstrings »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.16.1 on <span class="colophon-date" title="Sunday 18 January 2026 16:06">Sunday 18 January 2026</span>. Using Julia version 1.12.4.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
