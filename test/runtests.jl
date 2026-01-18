@@ -61,122 +61,6 @@ using Test
     end
 end
 
-@testset "Z2LinearAlgebra" begin
-    @testset "vector basics" begin
-        v = Z2Vector(0b10110, 5)
-        @test v isa Z2Vector{UInt8}
-        @test Z2Vector([false, true, true, false, true]) == v
-
-        @test v.data ≡ 0b10110
-        @test v.size ≡ 5
-
-        zerov = zero(v)
-        @test zerov isa Z2Vector{UInt8}
-        @test iszero(zerov.data)
-        @test iszero(zerov)
-    end
-    @testset "index" begin
-        v = Z2Vector(0b10110, 5)
-
-        @test_throws BoundsError v[0]
-        @test_throws BoundsError v[6]
-
-        @test v == [false, true, true, false, true]
-
-        @test typeof(v[:]) == typeof(v[1:5]) == typeof(v)
-        @test v[:] == v[1:5] == v
-    end
-    @testset "reduce" begin
-        v = Z2Vector(0b10110, 5)
-        @test sum(v) ≡ true
-        @test prod(v) ≡ false
-        @test any(v) ≡ true
-        @test all(v) ≡ false
-    end
-    @testset "algebra" begin
-        u = Z2Vector(0b01101, 5)
-        v = Z2Vector(0b10110, 5)
-
-        @test u + v == Z2Vector(0b11011, 5)
-        @test u - v == Z2Vector(0b11011, 5)
-        @test u ⋅ v ≡ true
-    end
-    @testset "matrix basics" begin
-        data = rand(Bool, 5, 10)
-        rect_col = Z2ColMat(data)
-        rect_row = Z2RowMat(data)
-
-        @testset "properties" begin
-            @test rect_col isa Z2ColMat{UInt8, UInt16}
-            @test rect_row isa Z2RowMat{UInt8, UInt16}
-            @test rect_col.size == 5
-            @test rect_row.size == 10
-            @test rect_col == rect_row == data
-        end
-
-        @testset "index" begin
-            @test rect_col[1, :] isa Z2Vector{UInt16}
-            @test rect_row[1, :] isa Z2Vector{UInt16}
-            @test rect_col[1, :] == rect_row[1, :] == data[1, :]
-
-            @test rect_col[:, 1] isa Z2Vector{UInt8}
-            @test rect_row[:, 1] isa Z2Vector{UInt8}
-            @test rect_col[:, 1] == rect_row[:, 1] == data[:, 1]
-        end
-
-        @testset "zero" begin
-            zero_col = zero(rect_col)
-            zero_row = zero(rect_row)
-
-            @test zero_col isa Z2ColMat{UInt8, UInt16}
-            @test zero_row isa Z2RowMat{UInt8, UInt16}
-            @test zero_col == zero_row == zero(data)
-
-            @test iszero(zero_col)
-            @test iszero(zero_row)
-        end
-
-        @testset "one" begin
-            @test_throws DimensionMismatch one(rect_col)
-            @test_throws DimensionMismatch one(rect_row)
-
-            square_col = Z2ColMat(data[1:5, 1:5])
-            square_row = Z2RowMat(data[1:5, 1:5])
-            one_col = one(square_col)
-            one_row = one(square_row)
-
-            @test one_col isa Z2ColMat{UInt8, UInt8}
-            @test one_row isa Z2RowMat{UInt8, UInt8}
-            @test one_col == one_row == one(data[1:5, 1:5])
-
-            @test isone(one_col)
-            @test isone(one_row)
-        end
-    end
-    @testset "unsafe constructors" begin
-        v_unsafe = unsafe_Z2Vector(0b10110, 4)
-        v_safe = Z2Vector(0b10110, 4)
-
-        @test v_unsafe != v_safe
-        @test v_unsafe.data == 0b10110
-        @test v_safe.data == 0b110
-
-        A_unsafe = unsafe_Z2ColMat([0b11111, 0b11111], 4)
-        A_safe = Z2ColMat([0b11111, 0b11111], 4)
-
-        @test A_unsafe != A_safe
-        @test A_unsafe.data == [0b11111, 0b11111]
-        @test A_safe.data == [0b1111, 0b1111]
-
-        B_unsafe = unsafe_Z2RowMat([0b11111, 0b11111], 4)
-        B_safe = Z2RowMat([0b11111, 0b11111], 4)
-
-        @test B_unsafe != B_safe
-        @test B_unsafe.data == [0b11111, 0b11111]
-        @test B_safe.data == [0b1111, 0b1111]
-    end
-end
-
 @testset "LogicalGates" begin
     @testset "constructor" begin
         @test AndGate(false, 2, [0]) isa AndGate
@@ -236,7 +120,7 @@ end
 
 DocMeta.setdocmeta!(TerrariaWiringHelper, :DocTestSetup, :(
     using TerrariaWiringHelper;
-    using TerrariaWiringHelper: z2number, lampstate2string, bit2type, setbit, getbit, datamask
+    using TerrariaWiringHelper: lampstate2string
 ); recursive=true)
 
 @testset "Doctest" begin
