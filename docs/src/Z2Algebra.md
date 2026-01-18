@@ -2,12 +2,8 @@
 
 Algebra on ``\mathbb{Z}_2`` is a useful tool for modelling and solving problems in Terraria logical wiring. [Z2Algebra.jl](https://github.com/putianyi889/Z2Algebra.jl) provides the functionality we need.
 
-```julia
-julia> using Pkg; Pkg.add(url="https://github.com/putianyi889/Z2Algebra.jl")
-
-julia> using Z2Algebra
-```
-```@setup hash941
+```@repl hash941
+using Pkg; Pkg.add(url="https://github.com/putianyi889/Z2Algebra.jl")
 using Z2Algebra
 ```
 
