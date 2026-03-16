@@ -19,7 +19,7 @@ Documenter = "1"
 LinearAlgebra = "1"
 StaticArrays = "1"
 Test = "1"
-Z2Algebra = "0.0.1"
+Z2Algebra = "0.0.3"
 julia = "1"
 
 [extras]
