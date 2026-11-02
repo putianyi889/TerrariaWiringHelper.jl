@@ -16,7 +16,7 @@ Z2Algebra = {url = "https://github.com/putianyi889/Z2Algebra.jl"}
 
 [compat]
 Documenter = "1"
-LinearAlgebra = "1"
+LinearAlgebra = "<0.0.1, 1"
 StaticArrays = "1"
 Test = "1"
 Z2Algebra = "0.0.3"
